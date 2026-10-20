@@ -56,7 +56,7 @@ and [`reports/figures/relativities.png`](reports/figures/relativities.png).
   at-fault claim), so it carries most of what the insurer knows about the
   driver's past.
 - **One-way analysis double counts.** Drivers aged 18–20 claim 3.17× as often
-  as the base in the raw data, but most of that is their bonus-malus: new
+  as drivers aged 40–49 in the raw data, but most of that is their bonus-malus: new
   drivers start at 100 and have not had time to earn a bonus. With
   bonus-malus in the model, age alone adds 1.17× (95% CI 1.03–1.34). The
   same thing happens to Île-de-France: 1.38× raw, 1.03× once population
@@ -73,8 +73,8 @@ and [`reports/figures/relativities.png`](reports/figures/relativities.png).
 | 19, bonus-malus 100 (new driver) | age 1.17 × bonus-malus 4.91 | 0.279 |
 
 The model prices the 19-year-old only 17% above the 45-year-old with the same
-bonus-malus. That is not a bug: a 45-year-old at 100 has had recent at-fault
-claims, while a 19-year-old at 100 has simply just started. It is also why
+bonus-malus. That is not a bug: a 45-year-old at 100 has usually had at-fault
+claims in the last few years, while a 19-year-old at 100 has simply just started. It is also why
 the age curve dips below 1.00 for drivers aged 21–39: at a given bonus-malus,
 younger drivers have had less time to earn their bonus, so their coefficient
 overstates their risk and the age factor corrects for it. A purely
@@ -122,7 +122,7 @@ toy database with every kind of mismatch.
   fails; the loader parses it as a number and checks no IDs were lost.
 - Eight policies have 5–16 claims. Seven share a near-identical profile
   (driver aged 52–53, bonus-malus 50, brand B1, Languedoc-Roussillon) with
-  exposures of 0.07–0.41 years: almost certainly one fleet or duplicated
+  exposures of 0.07–0.41 years: most likely one fleet or duplicated
   records. Capped at 4.
 - 1,224 policies have exposure above one year (up to 2.01) in data described
   as one-year. Capped at 1.
@@ -157,7 +157,7 @@ Each choice, the alternatives and the evidence for it are written up in
 5. **Overdispersion.** Pearson dispersion is 1.72 but fragile: the 100
    most extreme of 542k policies supply 22% of it, and it drops to 1.33
    without the 33,830 policies insured for under 0.05 years (about 18 days). The
-   Cameron–Trivedi test is not significant (t = 1.62). Standard errors are
+   Cameron–Trivedi test is not significant at 5% (t = 1.62). Standard errors are
    scaled up by √1.72 anyway (quasi-Poisson), and a negative binomial refit
    moves no relativity by more than 1.1% and gives the same holdout deviance.
 6. **Validation.** Holdout grouped by risk profile; Poisson deviance, Gini,
@@ -191,8 +191,9 @@ Each choice, the alternatives and the evidence for it are written up in
 
 ## How to run
 
-Needs Python 3.10+ and about 1.5 GB of free RAM (3.2 GB with the negative
-binomial check). The first run downloads about 10 MB.
+Needs Python 3.10+ and about 3.2 GB of free RAM for the full run, or 1.5 GB
+with `--no-nb`, which skips the negative binomial check. The first run
+downloads about 10 MB.
 
 ```bash
 git clone https://github.com/<your-username>/motor-insurance-pricing.git

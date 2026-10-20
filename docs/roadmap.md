@@ -27,10 +27,9 @@ same bonus-malus, younger drivers have a better claims record (see decision
    reachable at their age (100 × 0.95^(years since 18), floored at 50).
 2. An interaction between a young-driver flag (under 30) and bonus-malus bands.
 
-**Done when:** on the same five grouped folds, the change improves mean
-holdout deviance in every fold, and the age relativities become roughly
-monotone. If it improves fewer than four folds, keep the simpler model and
-say so.
+**Done when:** on the same five grouped folds, the change improves holdout
+deviance in every fold, and the age relativities become roughly monotone. If
+it fails in any fold, keep the simpler model and say so.
 
 ## 3. Severity GLM
 
@@ -39,12 +38,14 @@ fewer factors than frequency: the drivers of how often someone crashes and
 how much a crash costs differ.
 
 **Design inputs from the data** (`docs/data_notes.md`):
-- 41 claims above €100,000 carry 17.7% of all claim cost. Cap each claim at
+- 41 claims above €100,000 carry 24.5% of all claim cost, 17.7% of it in
+  the part above €100,000. Cap each claim at
   a threshold chosen from a mean-excess plot, fit the GLM on capped amounts,
   and add the excess back as a flat loading (total excess ÷ total exposure).
-- 42% of claims sit on five flat-rate convention amounts. A Gamma fit is
-  still a reasonable mean model, but check holdout A/E by severity band;
-  a two-part model (probability of a convention amount, Gamma for the rest)
+- 42% of claims sit on five exact amounts (consistent with the flat-rate
+  IRSA convention). A Gamma fit is still a reasonable mean model, but check
+  holdout A/E by severity band; a two-part model (probability of a repeated
+  flat amount, Gamma for the rest)
   is the alternative if the fit is poor.
 
 **Done when:** holdout A/E on claim cost is within ±5% overall and by

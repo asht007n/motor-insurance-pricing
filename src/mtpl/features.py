@@ -60,9 +60,9 @@ def split_by_profile(df: pd.DataFrame, holdout_share: float = config.HOLDOUT_SHA
 def choose_base_levels(train: pd.DataFrame, factors: list[str] = config.RATING_FACTORS) -> dict[str, str]:
     """Base (relativity = 1.00) level for each factor: the level with most exposure.
 
-    The base level is where the intercept sits. Picking the biggest cell keeps
-    the intercept and every relativity's standard error as small as possible,
-    and makes the base driver a typical one rather than an edge case.
+    The base level is where the intercept sits. Every relativity is measured
+    against it, so a large base keeps their standard errors small, and the
+    base driver is a typical one rather than an edge case.
     """
     base = {}
     for f in factors:

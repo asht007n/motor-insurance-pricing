@@ -16,10 +16,10 @@ them into DuckDB as `policies_raw` and `claims_raw`.
 
 ### Why the version matters
 
-CASdatasets replaced both freMTPL2 files on 2024-09-17 (package 1.2-0, per its
-`NEWS.md`). Most tutorials use an older copy:
+In CASdatasets 1.2-0 both freMTPL2 files carry a date of 2024-09-17 (package
+`NEWS.md`). Most tutorials use an older copy, and its counts differ:
 
-| | This repo (CASdatasets 1.2-1) | Older copy (OpenML 41214/41215, Kaggle, Hugging Face) |
+| | This repo (CASdatasets 1.2-1) | Older copies (OpenML 41214/41215, Kaggle, Hugging Face), as their documentation reports |
 |---|---|---|
 | Policies | 677,991 | 678,013 (scikit-learn documentation) |
 | Claim records | 26,444 | 26,639 (Hugging Face dataset card) |
@@ -107,9 +107,11 @@ From `reports/tables/data_profile.csv`, all 26,444 claims, uncapped:
 | Maximum | €4,075,401 |
 | Claims on the five most common exact amounts (1,204; 1,128.12; 1,172; 1,128; 602) | 42% of claims, 21% of cost |
 | Claims above €100,000 | 41 |
-| Cost above €100,000 on those claims | 17.7% of all claim cost |
+| Cost of those 41 claims | 24.5% of all claim cost |
+| The part of those claims above €100,000 | 17.7% of all claim cost |
 
-Two consequences for phase 3 of the roadmap: the distribution is a point
-mass of convention amounts plus a long tail, not one smooth Gamma; and 41
-claims carry almost a fifth of the cost, so large claims have to be capped
-and their excess loaded back separately or they will dominate any fit.
+Two consequences for phase 3 of the roadmap: the distribution is a few
+heavily repeated exact amounts (consistent with the flat-rate convention the
+documentation mentions) plus a long tail, not one smooth Gamma; and 41 claims
+carry a quarter of the cost, so large claims have to be capped and their
+excess loaded back separately or they will dominate any fit.

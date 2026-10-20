@@ -39,6 +39,7 @@ sev AS (
         QUANTILE_CONT(ClaimAmount, 0.99)                AS p99,
         MAX(ClaimAmount)                                AS mx,
         COUNT(*) FILTER (WHERE ClaimAmount > 100000)    AS n_over_100k,
+        SUM(ClaimAmount) FILTER (WHERE ClaimAmount > 100000) AS cost_over_100k,
         SUM(GREATEST(ClaimAmount - 100000, 0))          AS excess_over_100k
     FROM claims_clean
 )
@@ -61,4 +62,5 @@ UNION ALL SELECT 'claims_on_5_most_common_amounts_share',
 UNION ALL SELECT 'cost_on_5_most_common_amounts_share',
        (SELECT SUM(n * ClaimAmount) FROM amount_counts WHERE rk <= 5) / (SELECT total FROM sev)
 UNION ALL SELECT 'claims_over_100k', n_over_100k FROM sev
+UNION ALL SELECT 'cost_share_of_claims_over_100k', cost_over_100k / total FROM sev
 UNION ALL SELECT 'cost_share_above_100k_excess', excess_over_100k / total FROM sev;

@@ -3,7 +3,7 @@
     "source": "CASdatasets @ 227fb56b8734bdb7c0327a41180e01d2ddaeaf26",
     "policies": 677991,
     "claims_raw": 26444,
-    "exposure_years_raw": 358482.8354629091,
+    "exposure_years_raw": 358482.8354629084,
     "policies_with_claims": 24944,
     "share_policies_no_claim": 0.9632089511512689,
     "count_mismatches": 0,
@@ -11,18 +11,18 @@
     "policies_claims_capped": 8,
     "claims_after_cap": 26405,
     "policies_exposure_capped": 1224,
-    "exposure_years_clean": 358343.4954625884,
+    "exposure_years_clean": 358343.495462872,
     "risk_profiles": 528745,
     "policies_sharing_a_profile": 257908,
     "profile": {
-      "bm_exposure_share_on_claim_free_ladder": 0.9108369087612733,
-      "corr_area_code_log_density": 0.970618379185643,
+      "bm_exposure_share_on_claim_free_ladder": 0.9108369087622882,
+      "corr_area_code_log_density": 0.9706183791856091,
       "repeated_profile_groups": 108662.0,
       "repeated_profile_policies": 257908.0,
       "repeated_profile_share_groups_ids_within_100": 0.7853343395115128,
       "repeated_profile_median_id_span": 2.0,
-      "repeated_profile_mean_exposure": 0.327708732755896,
-      "all_policies_mean_exposure": 0.528537245277475,
+      "repeated_profile_mean_exposure": 0.327708732755853,
+      "all_policies_mean_exposure": 0.528537245277712,
       "claims": 26444.0,
       "claim_amount_median": 1172.0,
       "claim_amount_mean": 2265.512649372116,
@@ -31,6 +31,7 @@
       "claims_on_5_most_common_amounts_share": 0.42289366207835427,
       "cost_on_5_most_common_amounts_share": 0.21436348979794798,
       "claims_over_100k": 41.0,
+      "cost_share_of_claims_over_100k": 0.24548844583872878,
       "cost_share_above_100k_excess": 0.1770515635102767
     }
   },
@@ -301,5 +302,5 @@
       ]
     }
   },
-  "runtime_seconds": 86.3
+  "runtime_seconds": 57.6
 }

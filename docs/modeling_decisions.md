@@ -42,9 +42,8 @@ other driver.
 **Cost.** 39 claims removed of 26,444 (0.15%).
 
 **Alternatives.** Drop the eight policies (loses the information that they did
-claim); keep them (lets one suspect cluster set two relativities). Capping is
-also the convention in published freMTPL2 work, including the scikit-learn
-example.
+claim); keep them (lets one suspect cluster set two relativities). The
+scikit-learn freMTPL2 example uses the same cap.
 
 ---
 
@@ -69,7 +68,7 @@ been tested separately; it is listed as a limitation.
 **Why Poisson.** Claim counts are non-negative integers, mostly 0 or 1, and
 their variance grows with their mean. Poisson is the natural starting
 distribution for counts, and its estimates of the mean stay consistent even
-when the variance assumption is off (see decision 9).
+when the variance assumption is off (see decision 11).
 
 **Why a log link.** It makes the model multiplicative:
 `rate = base × age factor × bonus-malus factor × ...`. That is exactly the
@@ -112,9 +111,9 @@ gap 2), and these policies average 0.33 years of exposure against 0.53
 overall. Most look like one driver's year split across several records. A
 policy-level random split would put part of the same driver in training and
 part in the holdout, so the holdout would partly test memory instead of
-prediction. A banded GLM cannot memorise much, so the effect here is small,
-but a gradient-boosted challenger can, and it must be judged on the same
-honest split.
+prediction. A banded GLM cannot memorise individual profiles, so for it the
+effect should be small, but a gradient-boosted challenger can, and it must be
+judged on the same honest split.
 
 **Limitation.** Unrelated drivers who happen to match on all nine fields are
 grouped (harmless). True duplicates that differ on one field are not caught.
@@ -154,7 +153,7 @@ roughly linearly in log(density), not in density.
 **Why.** Area is a coarse banding of population density: the correlation
 between the area code and log density is 0.97. With both in the model, one
 effect gets split arbitrarily between two aliased factors, the standard
-errors balloon, and neither relativity means anything on its own. Density is
+errors grow, and neither relativity means anything on its own. Density is
 the finer of the two, so it stays.
 
 ---
@@ -181,7 +180,8 @@ cells (summed claims, summed exposure) before fitting.
 policies with the same rate only through their total claims and total
 exposure. So the cell fit gives exactly the same coefficients and standard
 errors as the policy-level fit (a unit test checks agreement to 1e-8) on a
-third of the rows. With Newton's method this keeps peak memory near 1.5 GB.
+third of the rows. With Newton's method, a run without the negative
+binomial check stays near 1.5 GB of memory.
 
 **What does not pool.** Dispersion is a statement about policy-level
 variation, so the dispersion checks run on individual policies.
@@ -209,8 +209,7 @@ different variance assumption change the relativities?
   which is why Pearson is used.
 - Cameron–Trivedi regression test: α = 0.67, t = 1.62, not significant at 5%.
 - Negative binomial (NB2) refit with that α: no relativity moves more than
-  1.1% (median 0.15%), and holdout deviance explained is the same to three
-  decimals.
+  1.1% (median 0.15%), and holdout deviance explained is 5.24% for both.
 
 **Conclusion.** Mild, fragile overdispersion that does not change the
 tariff. Scaling the standard errors by √1.72 is the conservative way to
@@ -279,8 +278,8 @@ French tariffs use it.
    data owner first.
 2. *Interaction with age.* A young driver cannot have reached 50 yet: the
    coefficient starts at 100 and falls 5% per claim-free year. So at the same
-   bonus-malus, a younger driver has a better claims record than an older
-   one. The multiplicative model can only express that through the age
+   bonus-malus, a younger driver tends to have a better claims record than an
+   older one. The multiplicative model can only express that through the age
    factor, which is why the age curve dips to 0.58 at 26–29. An age ×
    bonus-malus interaction, or a feature such as "bonus-malus above the best
    value reachable at this age", is the first improvement on the roadmap.

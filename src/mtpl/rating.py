@@ -58,7 +58,7 @@ def main() -> None:
     p.add_argument("--bonus-malus", type=int, required=True, help="50 (best) to 350")
     p.add_argument("--vehicle-age", type=int, required=True)
     p.add_argument("--power", type=int, required=True, help="vehicle power class, 4-15")
-    p.add_argument("--brand", required=True, help="B1..B14")
+    p.add_argument("--brand", required=True, help="B1-B6 or B10-B14")
     p.add_argument("--fuel", required=True, choices=["Diesel", "Regular"])
     p.add_argument("--density", type=int, required=True, help="inhabitants per km²")
     p.add_argument("--region", required=True)

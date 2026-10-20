@@ -21,9 +21,10 @@ TABLE_DIR = REPORTS_DIR / "tables"
 # --------------------------------------------------------------------------
 # Data source, pinned to one commit of the CASdatasets repository so the
 # numbers in the README can be reproduced exactly. Older copies of freMTPL2
-# (OpenML 41214/41215, Kaggle, Hugging Face) are a different version: they
-# have 678,013 policies, 26,639 claim rows and ~9k policies whose ClaimNb
-# disagrees with the severity table. The reconciliation step handles either.
+# (OpenML 41214/41215, Kaggle, Hugging Face) are a different version: their
+# documentation reports 678,013 policies, 26,639 claim rows and ~9k policies
+# whose ClaimNb disagrees with the severity table. The reconciliation step
+# handles either.
 # --------------------------------------------------------------------------
 CAS_COMMIT = "227fb56b8734bdb7c0327a41180e01d2ddaeaf26"  # CASdatasets 1.2-1
 _CAS_RAW = f"https://raw.githubusercontent.com/dutangc/CASdatasets/{CAS_COMMIT}/data"
@@ -41,7 +42,7 @@ SOURCES = {
 # --------------------------------------------------------------------------
 # Cleaning thresholds (see docs/modeling_decisions.md for the reasoning)
 # --------------------------------------------------------------------------
-MAX_CLAIMS_PER_POLICY = 4   # 8 policies have 5-16 claims; 7 of them share one profile
+MAX_CLAIMS_PER_POLICY = 4   # 8 policies have 5-16 claims; 7 share a near-identical profile
 MAX_EXPOSURE_YEARS = 1.0    # data is described as observed "mostly on one year"
 
 # --------------------------------------------------------------------------
@@ -50,7 +51,7 @@ MAX_EXPOSURE_YEARS = 1.0    # data is described as observed "mostly on one year"
 SEED = 2026
 HOLDOUT_SHARE = 0.20
 # Columns that define a "risk profile". Policies with identical values are
-# kept on the same side of the split (see modeling_decisions.md, decision 5).
+# kept on the same side of the split (see modeling_decisions.md, decision 6).
 PROFILE_COLS = [
     "VehPower", "VehAge", "DrivAge", "BonusMalus", "VehBrand",
     "VehGas", "Area", "Density", "Region",

@@ -98,7 +98,8 @@ def one_way_vs_glm(rel: pd.DataFrame, path: Path, factors=("driver_age", "bonus_
             axb.set_ylabel("% exposure")
         base_idx = int(np.flatnonzero(d.is_base)[0])
         axb.get_xticklabels()[base_idx].set_fontweight("bold")
-    fig.text(0.125, -0.04, "Base level in bold. Training data, 286k policy-years.",
+    years = rel[rel.factor == factors[0]].exposure_years.sum()
+    fig.text(0.125, -0.04, f"Base level in bold. Training data, {years / 1000:.0f}k policy-years.",
              color=INK_2, fontsize=8)
     fig.savefig(path, dpi=160, bbox_inches="tight")
     plt.close(fig)
