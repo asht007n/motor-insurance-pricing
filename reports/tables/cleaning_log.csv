@@ -1,0 +1,6 @@
+step_order,step,rows_affected,policies,claims,exposure_years
+1,Raw policy table,,677991,26444.0,358482.8354629091
+2,Drop claim records with no matching policy,0,677991,26444.0,358482.8354629091
+3,Set ClaimNb to the number of claim records,0,677991,26444.0,358482.8354629091
+4,Cap ClaimNb at 4,8,677991,26405.0,358482.8354625884
+5,Cap Exposure at 1.0 year,1224,677991,26405.0,358343.4954625884

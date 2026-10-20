@@ -1,0 +1,3 @@
+status,policies,claims_on_policy_table,claim_records
+match: has claims,24944,26444.0,26444.0
+match: no claims,653047,0.0,0.0

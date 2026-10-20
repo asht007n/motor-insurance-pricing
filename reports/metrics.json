@@ -1,0 +1,305 @@
+{
+  "data": {
+    "source": "CASdatasets @ 227fb56b8734bdb7c0327a41180e01d2ddaeaf26",
+    "policies": 677991,
+    "claims_raw": 26444,
+    "exposure_years_raw": 358482.8354629091,
+    "policies_with_claims": 24944,
+    "share_policies_no_claim": 0.9632089511512689,
+    "count_mismatches": 0,
+    "orphan_claim_records": 0,
+    "policies_claims_capped": 8,
+    "claims_after_cap": 26405,
+    "policies_exposure_capped": 1224,
+    "exposure_years_clean": 358343.4954625884,
+    "risk_profiles": 528745,
+    "policies_sharing_a_profile": 257908,
+    "profile": {
+      "bm_exposure_share_on_claim_free_ladder": 0.9108369087612733,
+      "corr_area_code_log_density": 0.970618379185643,
+      "repeated_profile_groups": 108662.0,
+      "repeated_profile_policies": 257908.0,
+      "repeated_profile_share_groups_ids_within_100": 0.7853343395115128,
+      "repeated_profile_median_id_span": 2.0,
+      "repeated_profile_mean_exposure": 0.327708732755896,
+      "all_policies_mean_exposure": 0.528537245277475,
+      "claims": 26444.0,
+      "claim_amount_median": 1172.0,
+      "claim_amount_mean": 2265.512649372116,
+      "claim_amount_p99": 16451.223999999962,
+      "claim_amount_max": 4075400.56,
+      "claims_on_5_most_common_amounts_share": 0.42289366207835427,
+      "cost_on_5_most_common_amounts_share": 0.21436348979794798,
+      "claims_over_100k": 41.0,
+      "cost_share_above_100k_excess": 0.1770515635102767
+    }
+  },
+  "split": {
+    "seed": 2026,
+    "train_policies": 542055,
+    "holdout_policies": 135936,
+    "train_exposure": 286602.1133947152,
+    "holdout_exposure": 71741.38206826859,
+    "train_claims": 21095,
+    "holdout_claims": 5310
+  },
+  "model": {
+    "n_train_policies": 542055,
+    "n_train_cells": 193242,
+    "n_params": 70,
+    "converged": true,
+    "train_deviance": 130196.94847016197,
+    "pearson_phi": 1.716086485289118,
+    "deviance_phi": 0.2402224203071339,
+    "cameron_trivedi_alpha": 0.6652226651554085,
+    "cameron_trivedi_t": 1.6230133176678028,
+    "pearson_share_from_top100_policies": 0.2193609539817458,
+    "pearson_phi_excluding_exposure_under_0.05": 1.3300885220490068,
+    "policies_exposure_under_0.05": 33830,
+    "train_claims_actual": 21095.0,
+    "train_claims_fitted": 21095.000000000004,
+    "base_levels": {
+      "driver_age": "40-49",
+      "bonus_malus": "50",
+      "vehicle_age": "6-9",
+      "vehicle_power": "6",
+      "vehicle_brand": "B1",
+      "fuel": "Regular",
+      "density": "50-149",
+      "region": "Centre"
+    },
+    "base_frequency": 0.04847035883469129,
+    "train_overall_frequency": 0.07360378383165468,
+    "train_max_level_ae_gap": 7.882583474838611e-15,
+    "rating_table_max_relative_gap": 1.5543122344752192e-15
+  },
+  "holdout": {
+    "mean_poisson_deviance_model": 0.23980928121278558,
+    "mean_poisson_deviance_null": 0.2530790208760122,
+    "deviance_explained": 0.05243318714168599,
+    "deviance_explained_ci95": [
+      0.047815122624887255,
+      0.05755338327570455
+    ],
+    "gini": 0.3049055688771527,
+    "gini_ci95": [
+      0.2905176443531278,
+      0.31933989791699996
+    ],
+    "actual_claims": 5310.0,
+    "expected_claims": 5288.27886770445,
+    "actual_to_expected": 1.0041074105278753,
+    "lift_top_vs_bottom_decile": 6.334175095547113,
+    "top_decile_share_of_claims": 0.25649717514124293,
+    "lift_decile_ae_min": 0.9323672015872191,
+    "lift_decile_ae_max": 1.059491259032392,
+    "factor_levels_checked": 77,
+    "factor_levels_abs_z_over_2": 2
+  },
+  "cross_validation_5fold": {
+    "deviance_explained": {
+      "mean": 0.048909867709642715,
+      "min": 0.04287651804553172,
+      "max": 0.05134127043231196
+    },
+    "gini": {
+      "mean": 0.29548768616917487,
+      "min": 0.27572414523429356,
+      "max": 0.3042711426138962
+    },
+    "actual_to_expected": {
+      "mean": 0.9999557682165874,
+      "min": 0.9865997463824532,
+      "max": 1.0184804285455615
+    }
+  },
+  "negative_binomial_check": {
+    "alpha": 0.6652226651554085,
+    "holdout_deviance_explained": 0.052438807144487676,
+    "max_relativity_change": 0.010969889163539026,
+    "median_relativity_change": 0.0014786108560758127
+  },
+  "examples": {
+    "new driver, 19, bonus-malus 100": {
+      "annual_frequency": 0.2788042763349062,
+      "multiple_of_base": 5.752057196146851,
+      "steps": [
+        {
+          "factor": "base",
+          "level": "",
+          "relativity": 1.0,
+          "frequency": 0.04847035883469129
+        },
+        {
+          "factor": "driver_age",
+          "level": "18-20",
+          "relativity": 1.1726674393497345,
+          "frequency": 0.05683961157904022
+        },
+        {
+          "factor": "bonus_malus",
+          "level": "100-109",
+          "relativity": 4.905105235407979,
+          "frequency": 0.2788042763349062
+        },
+        {
+          "factor": "vehicle_age",
+          "level": "6-9",
+          "relativity": 1.0,
+          "frequency": 0.2788042763349062
+        },
+        {
+          "factor": "vehicle_power",
+          "level": "6",
+          "relativity": 1.0,
+          "frequency": 0.2788042763349062
+        },
+        {
+          "factor": "vehicle_brand",
+          "level": "B1",
+          "relativity": 1.0,
+          "frequency": 0.2788042763349062
+        },
+        {
+          "factor": "fuel",
+          "level": "Regular",
+          "relativity": 1.0,
+          "frequency": 0.2788042763349062
+        },
+        {
+          "factor": "density",
+          "level": "50-149",
+          "relativity": 1.0,
+          "frequency": 0.2788042763349062
+        },
+        {
+          "factor": "region",
+          "level": "Centre",
+          "relativity": 1.0,
+          "frequency": 0.2788042763349062
+        }
+      ]
+    },
+    "experienced driver, 45, bonus-malus 50": {
+      "annual_frequency": 0.04847035883469129,
+      "multiple_of_base": 1.0,
+      "steps": [
+        {
+          "factor": "base",
+          "level": "",
+          "relativity": 1.0,
+          "frequency": 0.04847035883469129
+        },
+        {
+          "factor": "driver_age",
+          "level": "40-49",
+          "relativity": 1.0,
+          "frequency": 0.04847035883469129
+        },
+        {
+          "factor": "bonus_malus",
+          "level": "50",
+          "relativity": 1.0,
+          "frequency": 0.04847035883469129
+        },
+        {
+          "factor": "vehicle_age",
+          "level": "6-9",
+          "relativity": 1.0,
+          "frequency": 0.04847035883469129
+        },
+        {
+          "factor": "vehicle_power",
+          "level": "6",
+          "relativity": 1.0,
+          "frequency": 0.04847035883469129
+        },
+        {
+          "factor": "vehicle_brand",
+          "level": "B1",
+          "relativity": 1.0,
+          "frequency": 0.04847035883469129
+        },
+        {
+          "factor": "fuel",
+          "level": "Regular",
+          "relativity": 1.0,
+          "frequency": 0.04847035883469129
+        },
+        {
+          "factor": "density",
+          "level": "50-149",
+          "relativity": 1.0,
+          "frequency": 0.04847035883469129
+        },
+        {
+          "factor": "region",
+          "level": "Centre",
+          "relativity": 1.0,
+          "frequency": 0.04847035883469129
+        }
+      ]
+    },
+    "driver, 45, bonus-malus 100": {
+      "annual_frequency": 0.23775221088214765,
+      "multiple_of_base": 4.905105235407979,
+      "steps": [
+        {
+          "factor": "base",
+          "level": "",
+          "relativity": 1.0,
+          "frequency": 0.04847035883469129
+        },
+        {
+          "factor": "driver_age",
+          "level": "40-49",
+          "relativity": 1.0,
+          "frequency": 0.04847035883469129
+        },
+        {
+          "factor": "bonus_malus",
+          "level": "100-109",
+          "relativity": 4.905105235407979,
+          "frequency": 0.23775221088214765
+        },
+        {
+          "factor": "vehicle_age",
+          "level": "6-9",
+          "relativity": 1.0,
+          "frequency": 0.23775221088214765
+        },
+        {
+          "factor": "vehicle_power",
+          "level": "6",
+          "relativity": 1.0,
+          "frequency": 0.23775221088214765
+        },
+        {
+          "factor": "vehicle_brand",
+          "level": "B1",
+          "relativity": 1.0,
+          "frequency": 0.23775221088214765
+        },
+        {
+          "factor": "fuel",
+          "level": "Regular",
+          "relativity": 1.0,
+          "frequency": 0.23775221088214765
+        },
+        {
+          "factor": "density",
+          "level": "50-149",
+          "relativity": 1.0,
+          "frequency": 0.23775221088214765
+        },
+        {
+          "factor": "region",
+          "level": "Centre",
+          "relativity": 1.0,
+          "frequency": 0.23775221088214765
+        }
+      ]
+    }
+  },
+  "runtime_seconds": 86.3
+}
