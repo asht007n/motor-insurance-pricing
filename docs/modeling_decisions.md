@@ -179,7 +179,8 @@ cells (summed claims, summed exposure) before fitting.
 **Why.** For a Poisson model the log-likelihood depends on a group of
 policies with the same rate only through their total claims and total
 exposure. So the cell fit gives exactly the same coefficients and standard
-errors as the policy-level fit (a unit test checks agreement to 1e-8) on a
+errors as the policy-level fit (a unit test checks that the coefficients
+agree to 1e-8) on a
 third of the rows. With Newton's method, a run without the negative
 binomial check stays near 1.5 GB of memory.
 

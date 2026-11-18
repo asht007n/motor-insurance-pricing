@@ -32,14 +32,13 @@ def test_value_below_first_band_is_an_error():
 
 def _toy_policies(n=2_000, seed=0):
     rng = np.random.default_rng(seed)
-    df = pd.DataFrame({
+    return pd.DataFrame({
         "VehPower": rng.integers(4, 8, n), "VehAge": rng.integers(0, 5, n),
         "DrivAge": rng.integers(18, 30, n), "BonusMalus": 50,
         "VehBrand": rng.choice(["B1", "B2"], n), "VehGas": "Diesel",
         "Area": "C", "Density": 100, "Region": "Centre",
         "Exposure": rng.uniform(0.1, 1, n),
     })
-    return df
 
 
 def test_identical_profiles_stay_on_the_same_side_of_the_split():

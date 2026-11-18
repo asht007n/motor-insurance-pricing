@@ -54,8 +54,7 @@ def read_rda(path: Path) -> pd.DataFrame:
     objects = rdata.read_rda(str(path))
     if len(objects) != 1:
         raise ValueError(f"Expected one object in {path}, found {list(objects)}")
-    df = next(iter(objects.values())).reset_index(drop=True)
-    return df
+    return next(iter(objects.values())).reset_index(drop=True)
 
 
 def parse_policy_id(ids: pd.Series) -> pd.Series:
@@ -78,9 +77,7 @@ def to_parquet(paths: dict[str, Path]) -> dict[str, Path]:
     freq["IDpol"] = parse_policy_id(freq["IDpol"])
     if freq["IDpol"].duplicated().any():
         raise ValueError("Duplicate policy IDs in freMTPL2freq")
-    for col in ["ClaimNb"]:
-        freq[col] = freq[col].astype("int64")
-    for col in ["VehPower", "VehAge", "DrivAge", "BonusMalus", "Density"]:
+    for col in ["ClaimNb", "VehPower", "VehAge", "DrivAge", "BonusMalus", "Density"]:
         freq[col] = freq[col].astype("int64")
     for col in ["VehBrand", "VehGas", "Area", "Region"]:
         freq[col] = freq[col].astype(str)

@@ -145,11 +145,11 @@ def forest(rel: pd.DataFrame, path: Path) -> None:
     """Every relativity with its 95% CI, one panel per factor."""
     left = ["driver_age", "bonus_malus", "vehicle_age", "vehicle_power"]
     right = ["vehicle_brand", "fuel", "density", "region"]
-    n = lambda fs: [int((rel.factor == f).sum()) for f in fs]
     fig = plt.figure(figsize=(10, 12))
     outer = fig.add_gridspec(1, 2, wspace=0.55, top=0.95)
     for col, fs in enumerate([left, right]):
-        inner = outer[col].subgridspec(len(fs), 1, height_ratios=[k + 1.5 for k in n(fs)], hspace=0.5)
+        ratios = [int((rel.factor == f).sum()) + 1.5 for f in fs]
+        inner = outer[col].subgridspec(len(fs), 1, height_ratios=ratios, hspace=0.5)
         for i, f in enumerate(fs):
             ax = fig.add_subplot(inner[i])
             d = rel[rel.factor == f].reset_index(drop=True)

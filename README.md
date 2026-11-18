@@ -196,7 +196,7 @@ with `--no-nb`, which skips the negative binomial check. The first run
 downloads about 10 MB.
 
 ```bash
-git clone https://github.com/<your-username>/motor-insurance-pricing.git
+git clone https://github.com/asht007n/motor-insurance-pricing.git
 cd motor-insurance-pricing
 python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate

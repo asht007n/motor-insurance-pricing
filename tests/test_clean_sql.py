@@ -65,7 +65,7 @@ def test_reconciliation_summary_names_each_mismatch(con):
 
 
 def test_orphans_are_kept_out_of_the_claims_table(con):
-    assert con.sql("SELECT COUNT(*) FROM claims_clean WHERE IDpol = 99").fetchone()[0] == 0
+    assert con.execute("SELECT COUNT(*) FROM claims_clean WHERE IDpol = 99").fetchone()[0] == 0
 
 
 def test_scientific_notation_policy_id_is_parsed():

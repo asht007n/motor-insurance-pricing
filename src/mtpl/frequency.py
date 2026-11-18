@@ -92,10 +92,9 @@ def aggregate_cells(df: pd.DataFrame, factors: list[str] = config.RATING_FACTORS
     cells gives exactly the same coefficients and standard errors as fitting
     on individual policies, with about a third of the rows and memory.
     """
-    cells = (df.groupby(factors, observed=True)
-               .agg(ClaimNb=("ClaimNb", "sum"), Exposure=("Exposure", "sum"))
-               .reset_index())
-    return cells
+    return (df.groupby(factors, observed=True)
+              .agg(ClaimNb=("ClaimNb", "sum"), Exposure=("Exposure", "sum"))
+              .reset_index())
 
 
 def fit_frequency(train: pd.DataFrame, base: dict[str, str], levels: dict[str, list[str]],
@@ -194,16 +193,17 @@ def relativity_table(model: FrequencyModel, train: pd.DataFrame) -> pd.DataFrame
         for lev in model.levels[f]:
             name = f"{f}={lev}"
             is_base = lev == model.base[f]
+            seen = lev in g.index
             coef = 0.0 if is_base else float(model.params[name])
             se = 0.0 if is_base else float(model.bse_quasi[name])
             rows.append({
                 "factor": f,
                 "level": lev,
                 "is_base": is_base,
-                "exposure_years": float(g.loc[lev, "exposure"]) if lev in g.index else 0.0,
-                "claims": int(g.loc[lev, "claims"]) if lev in g.index else 0,
-                "observed_freq": float(g.loc[lev, "observed_freq"]) if lev in g.index else np.nan,
-                "one_way_relativity": float(g.loc[lev, "observed_freq"] / base_freq) if lev in g.index else np.nan,
+                "exposure_years": float(g.loc[lev, "exposure"]) if seen else 0.0,
+                "claims": int(g.loc[lev, "claims"]) if seen else 0,
+                "observed_freq": float(g.loc[lev, "observed_freq"]) if seen else np.nan,
+                "one_way_relativity": float(g.loc[lev, "observed_freq"] / base_freq) if seen else np.nan,
                 "glm_coef": coef,
                 "glm_se": se,
                 "glm_relativity": float(np.exp(coef)),

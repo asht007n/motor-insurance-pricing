@@ -45,7 +45,8 @@ def test_cell_fit_matches_policy_level_fit(sim):
     X = frequency.design_matrix(df, base, levels, FACTORS)
     full = sm.GLM(df.ClaimNb.to_numpy(float), X, family=sm.families.Poisson(),
                   offset=np.log(df.Exposure.to_numpy())).fit()
-    np.testing.assert_allclose(model.params[X.columns], full.params[X.columns], rtol=1e-8, atol=1e-10)
+    np.testing.assert_allclose(model.params[X.columns], full.params[X.columns],
+                               rtol=1e-8, atol=1e-10)
 
 
 def test_balance_property_on_training_data(sim):

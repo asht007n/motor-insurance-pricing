@@ -42,7 +42,8 @@ def test_gini_rewards_correct_ranking_and_ignores_scale():
 
 
 def test_lorenz_curve_runs_from_origin_to_one():
-    x, y = evaluate.lorenz_curve(np.array([0, 1, 2.0]), np.array([1, 1, 1.0]), np.array([0.1, 0.2, 0.3]))
+    claims, exposure = np.array([0, 1, 2.0]), np.array([1, 1, 1.0])
+    x, y = evaluate.lorenz_curve(claims, exposure, np.array([0.1, 0.2, 0.3]))
     assert (x[0], y[0]) == (0.0, 0.0)
     assert x[-1] == pytest.approx(1.0) and y[-1] == pytest.approx(1.0)
 
